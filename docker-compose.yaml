@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - my_mongodb:/data/db
+    networks:
+      - my_network
+  msyql8:
+    image: mysql:8.3.0
+    ports:
+      - "3306:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_DATABASE=test-db
+      - MYSQL_ROOT_PASSWORD=123456
+    volumes:
+      - mysql8_db:/data/db
+    networks:
+      - my_network
+
+volumes:
+  my_mongodb:
+  mysql8_db:
+
+networks:
+  my_network:
+    driver: bridge
